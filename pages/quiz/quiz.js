@@ -1,4 +1,4 @@
-import { verificarTema, trocarTema } from "../../helpers/tema-helper.js"
+import { trocarTema , verificarTema  } from "../../helpers/tema-helper.js"
 
 const botaoTema = document.querySelector(".tema button")
 const body = document.querySelector("body")
@@ -25,7 +25,7 @@ function alterarAssunto () {
 
     divIcone.classList.add(assunto.toLowerCase())
     iconeImg.setAttribute("src",  `../../assets/images/icon-${assunto.toLowerCase()}.svg`)
-    iconeImg.setAttribute("alt", `icone de ${assunto}`)
+    iconeImg.setAttribute("alt", `icone de $(assunto)`)
     assuntoTitulo.innerText = assunto
 
 }
@@ -53,8 +53,8 @@ function montarPergunta() {
             <div>
                     <p>Questão ${pergunta} de 10</p>
 
-                    <h2> ${alterarSinais(quiz.questions[pergunta-1].question)} </h2>
-                <div> 
+                    <h2>${alterarSinais(quiz.questions[pergunta - 1].question)} </h2>
+                </div> 
             <div class="barra_progresso">
                 <div style="width: ${pergunta * 10}%"></div>    
             </div>
@@ -64,16 +64,16 @@ function montarPergunta() {
             <section class="alternativas">
                 <form action="">
                     <label for="alternativa_a">
-                        <input type="radio" id="alternativa_a" name="alternativa" value=" ${alterarSinais(quiz.questions[pergunta-1].options[0])}">
+                        <input type="radio" id="alternativa_a" name="alternativa" value="${alterarSinais(quiz.questions[pergunta - 1].options[0])}">
 
                         <div>
                             <span>A</span>
-                            ${alterarSinais(quiz.questions[pergunta-1].options[0])}
+                            ${alterarSinais(quiz.questions[pergunta - 1].options[0])}
                         </div>
                     </label>
 
                     <label for="alternativa_b">
-                        <input type="radio" id="alternativa_b" name="alternativa" value=" ${alterarSinais(quiz.questions[pergunta-1].options[1])}">
+                        <input type="radio" id="alternativa_b" name="alternativa" value=" ${alterarSinais(quiz.questions[pergunta - 1].options[1])}">
 
                         <div>
                             <span>B</span>
@@ -82,7 +82,7 @@ function montarPergunta() {
                     </label>
 
                     <label for="alternativa_c">
-                        <input type="radio" id="alternativa_c" name="alternativa" value="${alterarSinais(quiz.questions[pergunta-1].options[2])}">
+                        <input type="radio" id="alternativa_c" name="alternativa" value="${alterarSinais(quiz.questions[pergunta - 1].options[2])}">
 
                         <div>
                             <span>C</span>
@@ -91,11 +91,11 @@ function montarPergunta() {
                     </label>
 
                     <label for="alternativa_d">
-                        <input type="radio" id="alternativa_d" name="alternativa" value="${alterarSinais(quiz.questions[pergunta-1].options[3])}">
+                        <input type="radio" id="alternativa_d" name="alternativa" value="${alterarSinais(quiz.questions[pergunta - 1].options[3])}">
 
                         <div>
                             <span>D</span>
-                            ${alterarSinais(quiz.questions[pergunta-1].options[3])}
+                            ${alterarSinais(quiz.questions[pergunta - 1].options[3])}
                         </div>
                     </label>
                 </form>
@@ -122,32 +122,30 @@ function validarResposta() {
     botaoEnviar.innerText = "Próxima"
     botaoEnviar.removeEventListener("click", validarResposta)
 
-    if (pergunta === 10) {
+    if(pergunta === 10) {
         botaoEnviar.innerText = "Finalizar"
-        botaoEnviar.removeEventListener("click", finalizar)
+        botaoEnviar.addEventListener("click", finalizar)
     } else {
         botaoEnviar.addEventListener("click", proximaPergunta)
 
     }
 
 
-    if (resposta === quiz.questions[pergunta-1].answer) {
+    if(resposta === quiz.questions[pergunta - 1].answer) {
         document.querySelector(`label[for='${idInputResposta}']`).setAttribute("id", "correta")
         pontos = pontos + 1
     } else {
         document.querySelector(`label[for='${idInputResposta}']`).setAttribute("id", "errada")
         document.querySelector(`label[for='${respostaCorretaId}']`).setAttribute("id", "correta")
-
-
     }
+
     pergunta = pergunta + 1
-    console.log(pergunta)
 }
 
 function finalizar() {
     localStorage.setItem("pontos", pontos)
 
-    window.location.href = "../resultado/resultado.html"
+    window.location.href = "../resultados/resultado.html"
 }
 
 function proximaPergunta() {

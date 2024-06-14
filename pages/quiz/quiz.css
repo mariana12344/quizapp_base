@@ -48,6 +48,7 @@ body{
 header {
     display: flex;
     justify-content: space-between;
+    padding: 16px 24px;
 }
 
 .assunto {
@@ -63,12 +64,12 @@ header {
     border-radius: 5px;
 }
 
-.akground: var(--bg-html);
+.assunto_icone.html {
+background: var(--bg-html);
 }
 
 .assunto_icone.css {
-    background: var(ssunto_icone.html {
-    bac--bg-css);
+    background: var(--bg-css)
 }
 
 .assunto_icone.javascript {
